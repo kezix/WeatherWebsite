@@ -1,0 +1,35 @@
+---
+interface Props {
+	weather: string;
+	dzien: string;
+	city: string;
+	hour: number;
+}
+
+// const { href, title, body } = Astro.props;
+import { fetchWeather } from '../utils/requestWeather.js';
+import Localization from '../../public/icons/localization.astro';
+import Moon from '../../public/icons/moon.astro';
+import Sun from '../../public/icons/sun.astro';
+const { weather, dzien, city, hour } = Astro.props;
+
+
+---
+
+<div class="bg  h-[150px] ml-0 mb-8 bg-blurple rounded-2xl flex select-none">
+	<p class="text-8xl text-white text-right relative flex items-end font-bold bottom-5 ml-10">{weather}</p>
+	<div class="flex flex-col relative self-end bottom-5">
+		<p class="font-bold text-white">{dzien}</p>
+		<div class="flex items-center text-white font-bold"><Localization class=""/> <p class="ml-1.5">{city}</p></div>
+	</div>
+	<div class="flex  text-white relative justify-end ml-auto mr-8 top-8">
+		{hour > 7 && hour < 19 ?  <Sun class=""/> : <Moon class=""/>}
+	</div>
+</div>
+
+<style>
+	.bg{
+		background: linear-gradient(180deg, #6e58f2cf 0%, rgb(89 102 242 / 18%) 100%);
+		box-shadow: 0px 0px 30px rgba(88, 101, 242, 0.15);
+	}
+</style>

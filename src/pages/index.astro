@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeftCard from '../components/LeftCard.astro';
+import WeatherCard from '../components/WeatherCard.astro';
+import { fetchWeather } from '../utils/requestWeather.js';
+import Github from '../../public/icons/github.astro';
+
+let weather = await fetchWeather() || [];
+
+---
+
+<Layout title="kezix weather ☁️">
+	<a class="absolute p-5 text-white opacity-50 right-0" href="https://github.com/kezix"><Github/></a>
+	<main class="min-h-screen min-w-screen flex algin-center flex-wrap items-center justify-center p-6">
+		<LeftCard/>
+		<div class="w-[575px]">
+			{weather.map((item) => {
+				return <WeatherCard weather={item.weather} city={item.city} hour={item.hour} dzien={item.dzien}/>
+			})}
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		background-image: var(--bg-gradient);
+		background-color: var(--bg-color);
+	}
+</style>
